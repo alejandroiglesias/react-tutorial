@@ -13,11 +13,9 @@ describe('CommentList component', () => {
   const comments = [{id: 1}, {id: 2}];
 
   it('renders a list of comments', () => {
-
     const commentList = TestUtils.renderIntoDocument(
       <CommentList data={comments} />
     );
-
     const numberOfCommentsInCommentList = ReactDOM.findDOMNode(commentList).children.length;
 
     expect(numberOfCommentsInCommentList).toBe(2);

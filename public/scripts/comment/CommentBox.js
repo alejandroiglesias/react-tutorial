@@ -59,4 +59,5 @@ var CommentBox = React.createClass({
   }
 });
 
-export default CommentBox;
+//export default CommentBox;
+module.exports = CommentBox; // Why doesn't work with "export"??

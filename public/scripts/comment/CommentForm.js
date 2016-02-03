@@ -19,7 +19,6 @@ var CommentForm = React.createClass({
     if (!text || !author) {
       return;
     }
-    // TODO: send request to the server
     this.props.onCommentSubmit({author: author, text: text});
     this.setState({author: '', text: ''});
   },
@@ -44,4 +43,5 @@ var CommentForm = React.createClass({
   }
 });
 
-export default CommentForm;
+//export default CommentForm;
+module.exports = CommentForm; // Why doesn't work with "export"??
