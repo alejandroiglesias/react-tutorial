@@ -5,7 +5,6 @@ import CommentList from './CommentList';
 import CommentForm from './CommentForm';
 import React from 'react';
 
-
 var CommentBox = React.createClass({
   loadCommentsFromServer: function() {
     $.ajax({

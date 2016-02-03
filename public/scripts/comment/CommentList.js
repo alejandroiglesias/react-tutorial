@@ -3,7 +3,6 @@
 import Comment from './Comment';
 import React from 'react';
 
-
 var CommentList = React.createClass({
   render: function() {
     var commentNodes = this.props.data.map(function(comment) {
@@ -21,4 +20,5 @@ var CommentList = React.createClass({
   }
 });
 
-export default CommentList;
+//export default CommentList;
+module.exports = CommentList; // Why doesn't work with "export"??

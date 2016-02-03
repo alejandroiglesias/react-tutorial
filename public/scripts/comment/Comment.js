@@ -3,7 +3,6 @@
 import marked from 'marked';
 import React from 'react';
 
-
 var Comment = React.createClass({
   rawMarkup: function() {
     var rawMarkup = marked(this.props.children.toString(), {sanitize: true});
@@ -22,4 +21,5 @@ var Comment = React.createClass({
   }
 });
 
-export default Comment;
+//export default Comment;
+module.exports = Comment; // Why doesn't work with "export"??

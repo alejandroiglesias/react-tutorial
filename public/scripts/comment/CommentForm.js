@@ -2,7 +2,6 @@
 
 import React from 'react';
 
-
 var CommentForm = React.createClass({
   getInitialState: function() {
     return {author: '', text: ''};
