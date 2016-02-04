@@ -1,6 +1,22 @@
 'use strict';
 
 import React from 'react';
+import {defineMessages, injectIntl, intlShape} from 'react-intl';
+
+const messages = defineMessages({
+  yourName: {
+    id: 'yourName',
+    defaultMessage: 'Your name'
+  },
+  saySomething: {
+    id: 'saySomething',
+    defaultMessage: 'Say something...'
+  },
+  post: {
+    id: 'post',
+    defaultMessage: 'Post'
+  }
+});
 
 var CommentForm = React.createClass({
   getInitialState: function() {
@@ -23,25 +39,31 @@ var CommentForm = React.createClass({
     this.setState({author: '', text: ''});
   },
   render: function() {
+    const {formatMessage} = this.props.intl;
+
     return (
       <form className="commentForm" onSubmit={this.handleSubmit}>
         <input
           type="text"
-          placeholder="Your name"
+          placeholder={formatMessage(messages.yourName)}
           value={this.state.author}
           onChange={this.handleAuthorChange}
         />
         <input
           type="text"
-          placeholder="Say something..."
+          placeholder={formatMessage(messages.saySomething)}
           value={this.state.text}
           onChange={this.handleTextChange}
         />
-        <input type="submit" value="Post" />
+        <input type="submit" value={formatMessage(messages.post)} />
       </form>
     );
   }
 });
 
+CommentForm.propTypes = {
+  intl: intlShape.isRequired
+};
+
 //export default CommentForm;
-module.exports = CommentForm; // Why doesn't work with "export"??
+module.exports = injectIntl(CommentForm); // Why doesn't work with "export"??
