@@ -22,7 +22,7 @@ const messages = {
 };
 
 ReactDOM.render(
-  <IntlProvider locale="es" messages={messages.es}>
+  <IntlProvider locale="en" messages={messages.en}>
     <CommentBox url="/api/comments" pollInterval={2000} />
   </IntlProvider>,
   document.getElementById('content')
