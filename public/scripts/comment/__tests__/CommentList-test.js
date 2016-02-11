@@ -20,5 +20,4 @@ describe('CommentList component', () => {
 
     expect(numberOfCommentsInCommentList).toBe(2);
   });
-
 });

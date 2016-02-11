@@ -1,6 +1,7 @@
 jest.dontMock('../CommentBox');
 
 import $ from 'jquery';
+import {IntlProvider} from 'react-intl';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
@@ -9,9 +10,7 @@ const CommentBox = require('../CommentBox');
 
 describe('CommentBox component', () => {
   it('sets a default initial state', () => {
-    const commentBox = TestUtils.renderIntoDocument(
-      <CommentBox url="/api/comments" pollInterval={2000} />
-    );
+    const commentBox = getCommentBox();
 
     expect(commentBox.state).toEqual({data: []});
   });
@@ -22,9 +21,7 @@ describe('CommentBox component', () => {
       return this;
     });
 
-    const commentBox = TestUtils.renderIntoDocument(
-      <CommentBox url="/api/comments" pollInterval={2000} />
-    );
+    const commentBox = getCommentBox();
 
     expect($.ajax).toBeCalledWith({
       url: '/api/comments',
@@ -39,9 +36,7 @@ describe('CommentBox component', () => {
   it('loads comments from server on an interval', () => {
     $.ajax.mockClear();
 
-    TestUtils.renderIntoDocument(
-      <CommentBox url="/api/comments" pollInterval={2000} />
-    );
+    getCommentBox();
 
     expect($.ajax.mock.calls.length).toBe(1);
 
@@ -51,9 +46,7 @@ describe('CommentBox component', () => {
   });
 
   it('handles comment submit', () => {
-    const commentBox = TestUtils.renderIntoDocument(
-      <CommentBox url="/api/comments" pollInterval={2000} />
-    );
+    const commentBox = getCommentBox();
 
     Date.now = jest.genMockFunction().mockReturnValue(123);
 
@@ -81,9 +74,7 @@ describe('CommentBox component', () => {
       return this;
     });
 
-    const commentBox = TestUtils.renderIntoDocument(
-      <CommentBox url="/api/comments" pollInterval={2000} />
-    );
+    const commentBox = getCommentBox();
 
     $.ajax.mockImplementation((obj) => {
       obj.error.call(null, null, 'status', 'err');
@@ -95,3 +86,11 @@ describe('CommentBox component', () => {
     expect(commentBox.state).toEqual({data: [{a: 1}]});
   });
 });
+
+function getCommentBox() {
+  return TestUtils.renderIntoDocument(
+    <IntlProvider locale="en">
+      <CommentBox url="/api/comments" pollInterval={2000} />
+    </IntlProvider>
+  );
+}

@@ -39,7 +39,10 @@
       "<rootDir>/node_modules/react-dom",
       "<rootDir>/node_modules/react-addons-test-utils",
       "<rootDir>/node_modules/fbjs",
-      "<rootDir>/node_modules/marked"
+      "<rootDir>/node_modules/marked",
+      "<rootDir>/node_modules/react-intl",
+      "<rootDir>/node_modules/intl-relativeformat",
+      "<rootDir>/node_modules/intl-messageformat"
     ],
     "modulePathIgnorePatterns": [
       "<rootDir>/node_modules/"

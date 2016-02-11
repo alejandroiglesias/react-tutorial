@@ -1,5 +1,6 @@
 jest.dontMock('../CommentForm');
 
+import {IntlProvider} from 'react-intl';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
@@ -9,7 +10,9 @@ const CommentForm = require('../CommentForm');
 describe('CommentForm component', () => {
   it('sets a default initial state', () => {
     const commentForm = TestUtils.renderIntoDocument(
-      <CommentForm />
+      <IntlProvider locale="en">
+        <CommentForm />
+      </IntlProvider>
     );
 
     expect(commentForm.state).toEqual({author: '', text: ''});
@@ -17,7 +20,9 @@ describe('CommentForm component', () => {
 
   it('handles state change', () => {
     const commentForm = TestUtils.renderIntoDocument(
-      <CommentForm />
+      <IntlProvider locale="en">
+        <CommentForm />
+      </IntlProvider>
     );
     const inputs = TestUtils.scryRenderedDOMComponentsWithTag(commentForm, 'input');
 
@@ -33,7 +38,9 @@ describe('CommentForm component', () => {
   it('handles form submit', () => {
     const submitMockFn = jest.genMockFunction();
     const commentForm = TestUtils.renderIntoDocument(
-      <CommentForm onCommentSubmit={submitMockFn} />
+      <IntlProvider locale="en">
+        <CommentForm onCommentSubmit={submitMockFn} />
+      </IntlProvider>
     );
     const formInstance = TestUtils.findRenderedDOMComponentWithTag(commentForm, 'form');
 
