@@ -9,21 +9,13 @@ const CommentForm = require('../CommentForm');
 
 describe('CommentForm component', () => {
   it('sets a default initial state', () => {
-    const commentForm = TestUtils.renderIntoDocument(
-      <IntlProvider locale="en">
-        <CommentForm />
-      </IntlProvider>
-    );
+    const commentForm = getCommentForm();
 
     expect(commentForm.state).toEqual({author: '', text: ''});
   });
 
   it('handles state change', () => {
-    const commentForm = TestUtils.renderIntoDocument(
-      <IntlProvider locale="en">
-        <CommentForm />
-      </IntlProvider>
-    );
+    const commentForm = getCommentForm();
     const inputs = TestUtils.scryRenderedDOMComponentsWithTag(commentForm, 'input');
 
     TestUtils.Simulate.change(inputs[0], {target: {value: 'author'}});
@@ -37,11 +29,7 @@ describe('CommentForm component', () => {
 
   it('handles form submit', () => {
     const submitMockFn = jest.genMockFunction();
-    const commentForm = TestUtils.renderIntoDocument(
-      <IntlProvider locale="en">
-        <CommentForm onCommentSubmit={submitMockFn} />
-      </IntlProvider>
-    );
+    const commentForm = getCommentForm(submitMockFn);
     const formInstance = TestUtils.findRenderedDOMComponentWithTag(commentForm, 'form');
 
     TestUtils.Simulate.submit(formInstance);
@@ -57,3 +45,13 @@ describe('CommentForm component', () => {
     expect(commentForm.state).toEqual({author: '', text: ''});
   });
 });
+
+
+function getCommentForm(submitMockFn) {
+  submitMockFn = submitMockFn || jest.genMockFunction();
+  return React.Children.only(TestUtils.renderIntoDocument(
+    <IntlProvider locale="en">
+      <CommentForm onCommentSubmit={submitMockFn} />
+    </IntlProvider>
+  ));
+}

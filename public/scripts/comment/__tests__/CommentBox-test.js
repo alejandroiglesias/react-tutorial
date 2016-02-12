@@ -10,7 +10,7 @@ const CommentBox = require('../CommentBox');
 
 describe('CommentBox component', () => {
   it('sets a default initial state', () => {
-    const commentBox = getCommentBox();
+    const commentBox = React.Children.only(getCommentBox().props.children);
 
     expect(commentBox.state).toEqual({data: []});
   });
@@ -21,7 +21,7 @@ describe('CommentBox component', () => {
       return this;
     });
 
-    const commentBox = getCommentBox();
+    const commentBox = React.Children.only(getCommentBox().props.children);
 
     expect($.ajax).toBeCalledWith({
       url: '/api/comments',
@@ -46,7 +46,7 @@ describe('CommentBox component', () => {
   });
 
   it('handles comment submit', () => {
-    const commentBox = getCommentBox();
+    const commentBox = React.Children.only(getCommentBox().props.children);
 
     Date.now = jest.genMockFunction().mockReturnValue(123);
 
@@ -74,7 +74,7 @@ describe('CommentBox component', () => {
       return this;
     });
 
-    const commentBox = getCommentBox();
+    const commentBox = React.Children.only(getCommentBox().props.children);
 
     $.ajax.mockImplementation((obj) => {
       obj.error.call(null, null, 'status', 'err');
